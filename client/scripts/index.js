@@ -20,7 +20,7 @@ var FormView = {
     msg.text = $('#message').val();
     msg.roomname = $('#room select').val();
 
-    Parse.create(msgText);
+    Parse.create(msg);
 
     console.log('click!');
   },
@@ -40,6 +40,8 @@ class AppMaker {
     this.username = window.location.search.substr(10);
     this.startSpinner();
     this.fetch(this.stopSpinner);
+
+    //setInterval(this.fetch, 3000);
   }
 
   initialize() {}
@@ -49,8 +51,9 @@ class AppMaker {
       console.log(`Parse received: ${data}`);
       MessageStore.receive(data);
       RoomStore.receive(data);
+      callback();
     });
-    this.stopSpinner();
+    //this.stopSpinner();
   }
 
   startSpinner() {
@@ -110,7 +113,6 @@ class MessagesViewMaker {
   // TODO: handle a user clicking on a message
   // (this should add the sender to the user's friend list).
   handleClick(event) {
-
   }
 }
 
