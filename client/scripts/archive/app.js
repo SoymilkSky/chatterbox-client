@@ -9,13 +9,8 @@ var App = {
   initialize: function() {
     App.username = window.location.search.substr(10);
 
-    FormView.initialize();
-    RoomsView.initialize();
-    MessagesView.initialize();
-
-    // Fetch initial batch of messages
     App.startSpinner();
-    App.fetch(App.stopSpinner);
+    AppMaker.fetch(AppMaker.stopSpinner);
 
 
     // TODO: Make sure the app loads data from the API
@@ -34,12 +29,12 @@ var App = {
   },
 
   startSpinner: function() {
-    App.$spinner.show();
+    AppMaker.$spinner.show();
     FormView.setStatus(true);
   },
 
   stopSpinner: function() {
-    App.$spinner.fadeOut('fast');
+    AppMaker.$spinner.fadeOut('fast');
     FormView.setStatus(false);
   }
 };

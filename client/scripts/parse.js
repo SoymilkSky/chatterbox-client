@@ -23,9 +23,9 @@ const processError = function(error) {
 
 var Parse = {
 
-  server: `https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/${window.CAMPUS}`,
+  server: 'https://app-hrsei-api.herokuapp.com/api/chatterbox/messages/rfp',
 
-  create: function(message, successCB, errorCB = null) {
+  create: function(message, success, error = null) {
     // TODO: send a request to the Parse API to save the message
     $.ajax({
       // This is the url you should use to communicate with the API server.
@@ -33,27 +33,23 @@ var Parse = {
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
-      success: function (data) {
-        console.log('chatterbox: Message sent');
-      },
-      error: function (data) {
-        // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
-        console.error('chatterbox: Failed to send message', data);
-      }
+      success: success || function (data) { console.log('chatterbox: Message sent'); },
+      error: error || function(data) { console.error('chatterbox: Failed to send message', data); }
     });
   },
 
   /**
    * async web call
    */
-  readAll: function(successCB, errorCB = null) {
+  readAll: function(success, error = null) {
     $.ajax({
       url: Parse.server,
       type: 'GET',
       data: { order: '-createdAt' },
       contentType: 'application/json',
-      success: processResponse,
-      error: processError,
+      success: success,
+      error: error
+      ,
     });
   }
 
