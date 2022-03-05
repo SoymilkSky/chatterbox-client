@@ -6,8 +6,6 @@ var App = {
 
   $spinner: $('.spinner img'),
 
-  username: 'anonymous',
-
   initialize: function() {
     App.username = window.location.search.substr(10);
 
@@ -19,6 +17,7 @@ var App = {
     App.startSpinner();
     App.fetch(App.stopSpinner);
 
+
     // TODO: Make sure the app loads data from the API
     // continually, instead of just once at the start.
   },
@@ -26,7 +25,8 @@ var App = {
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
       // examine the response from the server request:
-      console.log(data);
+      console.log(`Parse readAll: ${data}`);
+      MessageStore.receive(data); // msgs state has been mutated
 
       // TODO: Use the data to update Messages and Rooms
       // and re-render the corresponding views.
