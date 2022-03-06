@@ -41,7 +41,7 @@ class AppMaker {
     this.startSpinner();
     this.fetch(this.stopSpinner);
 
-    //setInterval(this.fetch, 3000);
+    // setInterval(this.fetch, 3000);
   }
 
   initialize() {}
@@ -51,9 +51,8 @@ class AppMaker {
       console.log(`Parse received: ${data}`);
       MessageStore.receive(data);
       RoomStore.receive(data);
-      callback();
     });
-    //this.stopSpinner();
+    this.stopSpinner();
   }
 
   startSpinner() {
